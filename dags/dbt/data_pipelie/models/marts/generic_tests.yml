@@ -1,0 +1,18 @@
+models:
+  - name: fct_orders
+    columns:
+    - name: order_key
+      tests:
+        - unique 
+        - not_null
+        - relationships:
+            arguments:
+              to: ref('staging_tpch_orders')
+              field: order_key
+            config:
+              severity: warn
+    - name: status_code
+      tests:
+        - accepted_values:
+            arguments:
+              values: ['F', 'O', 'P']          
